@@ -1,4 +1,5 @@
-/* Conversao de decimal para os demais sistemas numericos, para que nao haja redundancia de codigo as outras transformacoes utizaram as conversoes decimais.
+/* Conversao de decimal para os demais sistemas numericos, para que nao haja
+redundancia de codigo as outras transformacoes utizaram as conversoes decimais.
 ----------------------------------------------------------------------------
 _____________________________SISTEMA DECIMAL________________________________*/
 
@@ -67,7 +68,8 @@ function decimalBCD(numDecimal){ //DECIMAL -->BCD
 	var decimal = numDecimal;
 	var bcd = [];
 	
-	var tabelaBCD = {'0':'0000', '1':'0001', '2':'0010', '3':'0011', '4':'0100', '5':'0101', '6':'0110', '7':'0111', '8':'1000', '9':'1001'};
+	var tabelaBCD = {'0':'0000', '1':'0001', '2':'0010', '3':'0011', '4':'0100',
+			 '5':'0101', '6':'0110', '7':'0111', '8':'1000', '9':'1001'};
 	
 	for(i=0; i<decimal.length; i++){
 		bcd.push(tabelaBCD[decimal[i]]);
@@ -75,13 +77,15 @@ function decimalBCD(numDecimal){ //DECIMAL -->BCD
 	return bcd.join('');
 }
 
-/*----------------------------------------------------------------------
-Para que nao seja preciso criar mais codigo, todo o numero binario passarar pra decimal depois para o Sistema Numerico desejado.
+/*-------------------------------------------------------------------------
+Para que nao seja preciso criar mais codigo, todo o numero binario passarar
+pra decimal depois para o Sistema Numerico desejado.
 ---------------------------------------------------------------------------
 
 ________________________SISTEMA BINARIO & BCD______________________________
-Como o Sistema BCD e basicamente o mesmo que o do Binario, o codigo sera reaproveitado para ambas as conversoes*/
-
+Como o Sistema BCD e basicamente o mesmo que o do Binario, o codigo sera
+reaproveitado para ambas as conversoes
+--------------------------------------------------------------------------*/
 function binarioDecimal(numBinario){ //BINARIO --> DECIMAL
 	var binario = numBinario;
 	var decimal = 0;
@@ -154,7 +158,8 @@ function hexadecimalDecimal(numHexadecimal){ //HEXADECIMAL --> DECIMAL
 	var tabelaHex = {'A':'10', 'B':'11', 'C':'12', 'D':'13', 'E':'14', 'F':'15'};
 	
 	for(i=0; i<aux; i++){
-		if(hexadecimal[i]=='A' || hexadecimal[i]=='B' || hexadecimal[i]=='C' || hexadecimal[i]=='D' || hexadecimal[i]=='E' || hexadecimal[i]=='F'){
+		if(hexadecimal[i]=='A' || hexadecimal[i]=='B' || hexadecimal[i]=='C' ||
+		   hexadecimal[i]=='D' || hexadecimal[i]=='E' || hexadecimal[i]=='F'){
 			hexadecimal[i] = tabelaHex[hexadecimal[i]];
 		}
 	}
@@ -182,6 +187,47 @@ function hexadecimalBinario(numHexadecimal){ //HEXADECIMAL --> BCD
 	return bcd;
 }
 
+//__________________________LIMPANDO OS TEXTOS__________________________
+
+function limparDecimal(){ //Limpando totas as textFields exceto DECIMAL
+	document.getElementById('bin').value = '';
+	document.getElementById('oct').value = '';
+	document.getElementById('hex').value = '';
+	document.getElementById('bcd').value = '';
+}
+function limparBinario(){ //Limpando totas as textFields exceto BINARIO
+	document.getElementById('deci').value = '';
+	document.getElementById('oct').value = '';
+	document.getElementById('hex').value = '';
+	document.getElementById('bcd').value = '';
+}
+function limparOctal(){ //Limpando totas as textFields exceto OCTAL
+	document.getElementById('bin').value = '';
+	document.getElementById('deci').value = '';
+	document.getElementById('hex').value = '';
+	document.getElementById('bcd').value = '';
+}
+function limparHexadecimal(){ //Limpando totas as textFields exceto HEXADECIMAL
+	document.getElementById('bin').value = '';
+	document.getElementById('oct').value = '';
+	document.getElementById('deci').value = '';
+	document.getElementById('bcd').value = '';
+}
+function limparBCD(){ //Limpando totas as textFields exceto BCD
+	document.getElementById('bin').value = '';
+	document.getElementById('oct').value = '';
+	document.getElementById('hex').value = '';
+	document.getElementById('deci').value = '';
+}
+
+//__________________________LETRAS MAIUSCULAS______________________________
+
+function maiuscula(){
+  var tmp = document.getElementById('hex').value;
+  tmp = tmp.toUpperCase();
+  document.getElementById('hex').value = tmp;
+}
+
 /*______________________________ALERTAS_____________________________________
 Alertar caso nao tenha nenhum campo preenchido.
 --------------------------------------------------------------------------*/
@@ -198,6 +244,7 @@ function alerta(){
 	}
 	return true;
 }
+
 //______________________________BOTAO COVERTER________________________________
 
 function converter(){
