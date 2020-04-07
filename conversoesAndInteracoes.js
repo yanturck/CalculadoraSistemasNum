@@ -238,7 +238,7 @@ function alerta(){
 	var bcd = document.getElementById('bcd').value;
 	
 	if(decimal=='' && binario=='' && octal=='' && hexadecimal=='' && bcd==''){
-		alert('NENHUM CAMPRO PREENCHIDO, por favor preencha um campo!');
+		alert('NENHUM CAMPO PREENCHIDO, por favor preencha um campo!');
 		return false;
 	}
 	return true;
