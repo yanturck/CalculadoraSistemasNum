@@ -1,0 +1,38 @@
+body{
+	background-color: #DCDCDC;
+}
+header{
+	font-family: Verdana, sans-serif;
+	font-size: 40px;
+	background-color: #696969;
+	color: #F5F5F5;
+	font-variant: small-caps;
+}
+main{
+	background-color: #FFF;
+}
+.content{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.label{
+	font-family: Optima, sans-serif;
+	font-size: 35px;
+	font-variant: small-caps;
+}
+.field{
+	font-family: Optima, sans-serif;
+	font-size: 28px;
+	font-variant: small-caps;
+	border-radius: 7px;
+	padding: 7px;
+	width: 350px;
+}
+.button{
+	font-family: Optima, sans-serif;
+	font-size: 30px;
+	font-variant: small-caps;
+	background-color: #B0C4DE;
+	width: 200px;
+}
