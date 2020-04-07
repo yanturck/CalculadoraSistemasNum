@@ -1,7 +1,7 @@
 /* Conversao de decimal para os demais sistemas numericos, para que nao haja
 redundancia de codigo as outras transformacoes utizaram as conversoes decimais.
-----------------------------------------------------------------------------
-_____________________________SISTEMA DECIMAL________________________________*/
+--------------------------------------------------------------------------------
+_____________________________SISTEMA DECIMAL____________________________________*/
 
 function decimalBinario(numDecimal){ //DECIMAL --> BINARIO
 	var decimal = parseInt(numDecimal);
@@ -58,7 +58,7 @@ function decimalHexadecimal(numDecimal){ //DECIMAL --> HEXADECIMAL
 	}
 	for(i=0; i<hexadecimal.length; i++){
   		if(hexadecimal[i]>9){
-    	hexadecimal[i] = letrasHex[hexadecimal[i]]
+    		hexadecimal[i] = letrasHex[hexadecimal[i]];
   		}
 	}
 	return hexadecimal.reverse().join('');
@@ -81,11 +81,10 @@ function decimalBCD(numDecimal){ //DECIMAL -->BCD
 Para que nao seja preciso criar mais codigo, todo o numero binario passarar
 pra decimal depois para o Sistema Numerico desejado.
 ---------------------------------------------------------------------------
-
 ________________________SISTEMA BINARIO & BCD______________________________
 Como o Sistema BCD e basicamente o mesmo que o do Binario, o codigo sera
 reaproveitado para ambas as conversoes
---------------------------------------------------------------------------*/
+---------------------------------------------------------------------------*/
 function binarioDecimal(numBinario){ //BINARIO --> DECIMAL
 	var binario = numBinario;
 	var decimal = 0;
@@ -111,12 +110,12 @@ function binarioHexadecimal(numBinario){ //BINARIO --> HEXADECIMAL
 }
 //-------------------------------------------------------------------
 function binarioBCD(numBinario){ //BINARIO --> BCD
-	var decimal = binarioDecimal(numBinario);
+	var decimal = String(binarioDecimal(numBinario));
 	var bcd = decimalBCD(decimal);
 	return bcd;
 }
 
-//_____________________________SISTEMA OCTAL________________________________
+//_________________________SISTEMA OCTAL_____________________________
 
 function octalDecimal(numOctal){ //OCTAL --> DECIMAL
 	var octal = numOctal;
@@ -129,38 +128,38 @@ function octalDecimal(numOctal){ //OCTAL --> DECIMAL
 	}
 	return decimal;
 }
-//-------------------------------------------------------------------------
+//--------------------------------------------------------------------
 function octalBinario(numOctal){ //OCTAL --> BINARIO
 	var decimal = octalDecimal(numOctal);
 	var binario = decimalBinario(decimal);
 	return binario;
 }
-//-------------------------------------------------------------------------
+//--------------------------------------------------------------------
 function octalHexadecimal(numOctal){ //OCTAL --> HEXADECIMAL
 	var decimal = octalDecimal(numOctal);
 	var hexadecimal = decimalHexadecimal(decimal);
 	return hexadecimal;
 }
-//-------------------------------------------------------------------------
+//--------------------------------------------------------------------
 function octalBCD(numOctal){ //OCTAL --> BCD
-	var decimal = octalDecimal(numOctal);
+	var decimal = String(octalDecimal(numOctal));
 	var bcd = decimalBCD(decimal);
 	return bcd;
 }
 
-//_____________________________SISTEMA HEXADECIMAL__________________________
+//_________________________SISTEMA HEXADECIMAL________________________
 
 function hexadecimalDecimal(numHexadecimal){ //HEXADECIMAL --> DECIMAL
-	var hexadecimal = numHexadecimal;
+	var hexadecimal = numHexadecimal.split('');
 	var decimal = 0;
 
 	var aux = hexadecimal.length;
 	var tabelaHex = {'A':'10', 'B':'11', 'C':'12', 'D':'13', 'E':'14', 'F':'15'};
 	
 	for(i=0; i<aux; i++){
-		if(hexadecimal[i]=='A' || hexadecimal[i]=='B' || hexadecimal[i]=='C' ||
-		   hexadecimal[i]=='D' || hexadecimal[i]=='E' || hexadecimal[i]=='F'){
-			hexadecimal[i] = tabelaHex[hexadecimal[i]];
+		var tmp = hexadecimal[i];
+		if(tmp=='A' || tmp=='B' || tmp=='C' || tmp=='D' || tmp=='E' || tmp=='F'){
+			hexadecimal[i] = tabelaHex[tmp];
 		}
 	}
 	for(i=1, j=0; j<aux; i++, j++){
@@ -175,19 +174,19 @@ function hexadecimalBinario(numHexadecimal){ //HEXADECIMAL --> BINARIO
 	return binario;
 }
 //--------------------------------------------------------------------------
-function hexadecimalBinario(numHexadecimal){ //HEXADECIMAL --> OCTAL
+function hexadecimalOctal(numHexadecimal){ //HEXADECIMAL --> OCTAL
 	var decimal = hexadecimalDecimal(numHexadecimal);
 	var octal = decimalOctal(decimal);
 	return octal;
 }
 //--------------------------------------------------------------------------
-function hexadecimalBinario(numHexadecimal){ //HEXADECIMAL --> BCD
-	var decimal = hexadecimalDecimal(numHexadecimal);
-	var bcd = decimalBDC(decimal);
+function hexadecimalBCD(numHexadecimal){ //HEXADECIMAL --> BCD
+	var decimal = String(hexadecimalDecimal(numHexadecimal));
+	var bcd = decimalBCD(decimal);
 	return bcd;
 }
 
-//__________________________LIMPANDO OS TEXTOS__________________________
+//__________________________LIMPANDO OS TEXTOS______________________________
 
 function limparDecimal(){ //Limpando totas as textFields exceto DECIMAL
 	document.getElementById('bin').value = '';
