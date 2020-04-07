@@ -81,10 +81,7 @@ function decimalBCD(numDecimal){ //DECIMAL -->BCD
 Para que nao seja preciso criar mais codigo, todo o numero binario passarar
 pra decimal depois para o Sistema Numerico desejado.
 ---------------------------------------------------------------------------
-________________________SISTEMA BINARIO & BCD______________________________
-Como o Sistema BCD e basicamente o mesmo que o do Binario, o codigo sera
-reaproveitado para ambas as conversoes
----------------------------------------------------------------------------*/
+___________________________SISTEMA BINARIO_______________________________*/
 function binarioDecimal(numBinario){ //BINARIO --> DECIMAL
 	var binario = numBinario;
 	var decimal = 0;
@@ -186,6 +183,43 @@ function hexadecimalBCD(numHexadecimal){ //HEXADECIMAL --> BCD
 	return bcd;
 }
 
+//_________________________SISTEMA BCD______________________________________
+
+function bcdDecimal(numBCD){ //BCD --> DECIMAL
+	var bcd = [];
+	var decimal = [];
+	
+	for(i=0; i<numBCD.length; i+=4){
+		bcd.push(numBCD[i]+numBCD[i+1]+numBCD[i+2]+numBCD[i+3]);
+	}
+  
+  var aux = 0;
+	while(aux<bcd.length){
+		var tmp = binarioDecimal(bcd[aux]);
+		decimal.push(tmp);
+    	aux++;
+	}
+	return decimal.join('');
+}
+//--------------------------------------------------------------------------
+function bcdBinario(numBCD){ //BCD --> BINARIO
+	var decimal = String(bcdDecimal(numBCD));
+	var binario = decimalBinario(decimal);
+	return binario;
+}
+//--------------------------------------------------------------------------
+function bcdOctal(numBCD){ //BCD --> OCTAL
+	var decimal = String(bcdDecimal(numBCD));
+	var octal = decimalOctal(decimal);
+	return octal;
+}
+//--------------------------------------------------------------------------
+function bcdHexadecimal(numBCD){ //BCD --> HEXADECIMAL
+	var decimal = String(bcdDecimal(numBCD));
+	var hexadecimal = decimalHexadecimal(decimal);
+	return hexadecimal;
+}
+
 //__________________________LIMPANDO OS TEXTOS______________________________
 
 function limparDecimal(){ //Limpando totas as textFields exceto DECIMAL
@@ -229,8 +263,9 @@ function maiuscula(){
 
 /*______________________________ALERTAS_____________________________________
 Alertar caso nao tenha nenhum campo preenchido.
+Alertar quando o numero nao for no formato BCD
 --------------------------------------------------------------------------*/
-function alerta(){
+function nenhumCampo(){
 	var decimal = document.getElementById('deci').value;
 	var binario = document.getElementById('bin').value;
 	var octal = document.getElementById('oct').value;
@@ -239,6 +274,17 @@ function alerta(){
 	
 	if(decimal=='' && binario=='' && octal=='' && hexadecimal=='' && bcd==''){
 		alert('NENHUM CAMPO PREENCHIDO, por favor preencha um campo!');
+		return false;
+	}
+	return true;
+}
+
+function formatoBCD(){
+	var bcd = document.getElementById('bcd').value;
+	
+	var aux = (bcd.length)%4;
+	if(aux!=0){
+		alert('O número não está no Formato BCD!');
 		return false;
 	}
 	return true;
@@ -253,9 +299,8 @@ function converter(){
 	var hexadecimal = document.getElementById('hex').value;
 	var bcd = document.getElementById('bcd').value;
 	
-	var alertas = alerta();
 	
-	if (alertas==true){
+	if (nenhumCampo()==true){
 		if(decimal!=""){
 			document.getElementById('bin').value = decimalBinario(decimal);
 			document.getElementById('oct').value = decimalOctal(decimal);
@@ -277,10 +322,12 @@ function converter(){
 			document.getElementById('oct').value = hexadecimalOctal(hexadecimal);
 			document.getElementById('bcd').value = hexadecimalBCD(hexadecimal);
 		}else if(bcd!=''){
-			document.getElementById('deci').value = binarioDecimal(bcd);
-			document.getElementById('bin').value = decimalBinario(binarioDecimal(bcd));
-			document.getElementById('oct').value = binarioOctal(bcd);
-			document.getElementById('hex').value = binarioHexadecimal(bcd);
+			if(formatoBCD()==true){
+				document.getElementById('deci').value = bcdDecimal(bcd);
+				document.getElementById('bin').value = bcdBinario(bcd);
+				document.getElementById('oct').value = bcdOctal(bcd);
+				document.getElementById('hex').value = bcdHexadecimal(bcd);
+			}
 		}
 	}
 }
