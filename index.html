@@ -5,24 +5,30 @@
 		<title>Calculadora de sistemas numericos</title>
 		<script src="conversoesAndInteracoes.js"></script>
 	</head>
-	<link type="text/css" href="style.css">
+	<link rel='stylesheet' type="text/css" href="style.css">
 	<body>
-		<header>
-			
-		</header>
-		<main>
-			<section>
-				<label for="deci">Decimal</label>
-				<input id="deci" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onfocus='limparDecimal()' placeholder="Número em Decimal"></input><br>
-				<label for="bin">Binário</label>
-				<input id="bin" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onfocus='limparBinario()' placeholder="Número em Binário"></input><br>
-				<label for="oct" >Octal</label>
-				<input id="oct" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onfocus='limparOctal()' placeholder="Número em Octal"></input><br>
-				<label for="hex">Hexadecimal</label>
-				<input id="hex" onkeypress='maiuscula()' onfocus='limparHexadecimal()' placeholder="Número em Hexadecimal"></input><br>
-				<label for="bcd">BCD</label>
-				<input id="bcd" onkeypress='return event.charCode >= 48 && event.charCode <= 57' onfocus='limparBCD()' placeholder="Número em BCD"></input><br>
-				<button onClick="converter()">Converter</button>
+		<header class='content'><br>
+			Conversor de Sistemas Númericos
+		<br><br></header><br>
+		<main class='content'><br>
+			<section><br>
+				<label class='label' for='bcd'>BCD</label>
+				<input class='field' id="bcd" onkeypress='return event.charCode == 48 || event.charCode == 49 || ((event.charCode == 13 || event.charCode == 32) && converter()) || (event.charCode == 46 && limparOctal())' onfocus='limparBCD()' placeholder="Número em BCD"></input>
+				<br><br>
+				<label class='label' for='bin'>Binário</label>
+				<input class='field' id="bin" onkeypress='return event.charCode == 48 || event.charCode == 49 || ((event.charCode == 13 || event.charCode == 32) && converter()) || (event.charCode == 46 && limparOctal())' onfocus='limparBinario()' placeholder="Número em Binário"></input>
+				<br><br>
+				<label class='label' for='deci'>Decimal</label>
+				<input class='field' id="deci" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || ((event.charCode == 13 || event.charCode == 32) && converter()) || (event.charCode == 46 && limparOctal())' onfocus='limparDecimal()' placeholder="Número em Decimal"></input>
+				<br><br>
+				<label class='label' for='hex'>Hexadecimal</label>
+				<input class='field' id="hex" onkeypress='return (event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 70) || (event.charCode >= 97 && event.charCode <= 102) || ((event.charCode == 13 || event.charCode == 32) && converter()) || (event.charCode == 46 && limparOctal())' onkeyup='maiuscula()' onfocus='limparHexadecimal()' placeholder="Número em Hexadecimal"></input>
+				<br><br>
+				<label class='label' for='oct'>Octal</label>
+				<input class='field' id="oct" onkeypress='return (event.charCode >= 48 && event.charCode <= 55) || ((event.charCode == 13 || event.charCode == 32) && converter()) || (event.charCode == 46 && limparOctal())' onfocus='limparOctal()' placeholder="Número em Octal"></input>
+				<br><br>
+				<button class='button' onClick="converter()">Converter</button>
+				<br><br>
 			</section>
 		</main>
 	<body>
